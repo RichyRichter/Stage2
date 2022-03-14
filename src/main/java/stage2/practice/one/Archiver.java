@@ -14,7 +14,8 @@ public class Archiver {
 
         for (int i = 0, num = 0; i < length; i++, num += 2) {
             switch (input.charAt(i)) {
-                case 'A'->{}
+                case 'A' -> {
+                }
                 case 'C' -> bitSet.set(num + 1, true);
                 case 'G' -> bitSet.set(num, true);
                 case 'T' -> bitSet.set(num, num + 2, true);
@@ -23,25 +24,13 @@ public class Archiver {
         }
         return bitSet;
     }
+
     public String decompress() {
         StringBuilder res = new StringBuilder();
-        for (int i = 0; i < numBits; i+=2) {
-            if(!bitSet.get(i) && !bitSet.get(i + 1)) {
-                res.append("A");
-                continue;
-            }
-            if(!bitSet.get(i) && bitSet.get(i + 1)) {
-                res.append("C");
-                continue;
-            }
-            if(bitSet.get(i) && !bitSet.get(i + 1)) {
-                res.append("G");
-                continue;
-            }
-            if(bitSet.get(i) && bitSet.get(i + 1)) {
-                res.append("T");
-                continue;
-            }
+        for (int i = 0; i < numBits; i += 2) {
+            if (bitSet.get(i))
+                res.append(bitSet.get(i + 1) ? "T" : "G");
+            else res.append(bitSet.get(i + 1) ? "C" : "A");
         }
         return res.toString();
     }
@@ -56,7 +45,7 @@ public class Archiver {
 
     public static void main(String[] args) {
         Archiver archiver = new Archiver();
-        archiver.compress("CAT");//упаковка
+        archiver.compress("CATTAGG");//упаковка
         archiver.printView();//побитовое отображение
         System.out.println(archiver.decompress());//распаковка
     }
