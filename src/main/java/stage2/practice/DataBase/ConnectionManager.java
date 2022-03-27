@@ -32,7 +32,7 @@ public class ConnectionManager {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        return conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+        return conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
     }
 
     public static void closeConnection() throws SQLException {
